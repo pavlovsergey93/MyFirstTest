@@ -8,17 +8,17 @@ class EmailValidatorTest {
 
     @Test
     fun emailValidator_CorrectEmailSimple_ReturnsTrue() {
-        assertTrue(EmailValidator.isValidEmail("name@email.com"))
+        assertTrue(EmailValidator.isValidEmail("na##me@email.com"))
     }
 
     @Test
     fun emailValidator_CorrectEmailSubDomain_ReturnsTrue() {
-        assertTrue(EmailValidator.isValidEmail("name@email.co.uk"))
+        assertFalse(EmailValidator.isValidEmail("name@email.co.uk"))
     }
 
     @Test
     fun emailValidator_InvalidEmailNoTld_ReturnsFalse() {
-        assertFalse(EmailValidator.isValidEmail("name@email"))
+        assertTrue(EmailValidator.isValidEmail("name@email"))
     }
 
     @Test
@@ -33,11 +33,21 @@ class EmailValidatorTest {
 
     @Test
     fun emailValidator_EmptyString_ReturnsFalse() {
-        assertFalse(EmailValidator.isValidEmail(""))
+        assertTrue(EmailValidator.isValidEmail(""))
     }
 
     @Test
     fun emailValidator_NullEmail_ReturnsFalse() {
         assertFalse(EmailValidator.isValidEmail(null))
     }
+
+	@Test
+	fun emailValidator_InvalidEmailNoSpace_ReturnFalse(){
+		assertFalse(EmailValidator.isValidEmail("dfad sfa@fsfw.fsd"))
+	}
+
+	@Test
+	fun emailValidator_InvalidEmailNoSpecialСhars_ReturnsFalse(){
+		assertFalse(EmailValidator.isValidEmail("!#$%^@@fsfe.vos"))
+	}
 }
